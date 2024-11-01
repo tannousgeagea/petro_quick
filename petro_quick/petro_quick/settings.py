@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'tenants',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -165,7 +167,7 @@ UNFOLD = {
     # "THEME": "dark", # Force theme: "dark" or "light". Will disable theme switcher
     "LOGIN": {
         "image": lambda request: static("images/login.jpg"),
-        "redirect_after": lambda request: reverse_lazy("admin:database_tenant_changelist"),
+        "redirect_after": lambda request: reverse_lazy("admin:tenants_tenant_changelist"),
     },
     "EXTENSIONS": {
         "modeltranslation": {
@@ -209,6 +211,53 @@ UNFOLD = {
                             "admin:auth_group_changelist"
                             ),
                     }
+                ],
+            },
+            {
+                "title": _("Tenants"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Tenant"),
+                        "icon": "tenancy",
+                        "link": reverse_lazy(
+                            "admin:tenants_tenant_changelist"
+                            ),
+                    },
+                    {
+                        "title": _("Tenant Users"),
+                        "icon": "person_add",
+                        "link": reverse_lazy(
+                            "admin:tenants_tenantuser_changelist"
+                            ),
+                    }
+                ],
+            },
+            {
+                "title": _("Orders"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Fuel Types"),
+                        "icon": "local_fire_department",
+                        "link": reverse_lazy(
+                            "admin:orders_fueltype_changelist"
+                            ),
+                    },
+                    {
+                        "title": _("Orders"),
+                        "icon": "orders",
+                        "link": reverse_lazy(
+                            "admin:orders_order_changelist"
+                            ),
+                    },
+                    {
+                        "title": _("Order Items"),
+                        "icon": "order_approve",
+                        "link": reverse_lazy(
+                            "admin:orders_orderitem_changelist"
+                            ),
+                    },
                 ],
             },
  
